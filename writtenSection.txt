@@ -2,27 +2,98 @@ Answer each question in a written format
 
 1. What does semantic HTML mean?
 
+   Semantic HTML is a  way of writing HTML elements that explicitly tells the
+   meaning or intent of the the element. This makes it easy for both browsers, as
+   well as developers and others to read and understand what the element is.
+
+   ex: Instead of using the generic div, which shows no explicit meaning or
+       purpose for the element, you'd use something like header, footer,
+       section, article, form, etc.
+
 2. What is the box model?
+
+   The box model is a term used in CSS referring to the layout and design of HTML
+   elements. Each element is a box, consisting a margin (outside the border),
+   a border, padding (inside the border), and then the element's content within
+   the padding.
 
 3. What is the difference between IDs and Classes?
 
+   IDs are unique to a single HTML element and should only be used once, where
+   as classes can be used and reused on various elements.
+
 4. What does the z-index do?
+
+   It determines the stack order of HTML elements. Elements with a lower z-index
+   fall under those with a higher z-index.
 
 5. Summarize what the keyword 'this' is used for?
 
+   "'this' points to the object to the left of the dot."
+
+   It refers to what 'owns' the code. In a function 'this' refers to the object
+   that owns the function, while in an object it refers to the object itself. It
+   is commonly used with apply, bind and call in vanilla javascript and is also
+   used frequently in jQuery and Angular.
+
 6. What is a callback?
+
+   A callback is simply a function passed as a parameter to another function and
+   then called within the that function.
+
+   ex: function(x, callback){
+          return callback(x)
+       }
 
 7. What is a closure?
 
+   A closure is a function within another function that is returned. It has access
+   to all the variable values within it's scope at the moment it was returned,
+   even if those values change afterwards. In essence, it takes a 'snapshot' of
+   the available scope and works with that when it needs to execute.
+
 8. How does prototype work?
+
+   All objects in javascript have a prototype. Prototype allows faster creation
+   of objects because they exist in one place, and don't need to be recreated for
+   each object created. However, they aren't 'privileged' and therefore don't have
+   access to private data within the created object.
+
+   ex: function Person(first, last){
+        var data = 'this is private'
+
+        this.first = first;
+        this.last = last;
+        this.info = function() { return data; } // This function has access to both public and private data. It returns 'this is private'
+       }
+
+       Person.prototype.name = function(){ return this.first + ' ' + this.last } // Prototype has access to public data. Returns first and last name with space between.
+       Person.prototype.data = function(){ return data } // Returns reference error. data is not defined.
 
 9. What is MVC?
 
+   Model View Controller is a pattern for building web applications. The model
+   is the central component of the pattern and stores data. The view is the out
+   and what the user sees on the screen. The controller does the logic. It
+   receives input and sends commands to both model and its associated view based
+   to update the state.
+
 10. What is the component lifecycle?
+
+    It is what happens to the component, it's created, rendered, if it has children
+    they are created and rendered, data-bound changes are tracked and it's destroyed
+    before being removed from the DOM.
 
 11. What is REST?
 
+    Representational state transfer is a style for writing network based
+    applications. It uses HTTP protocol and is often used to make API calls.
+
 12. Name three ways of getting data from the URL using express
+
+      req.body
+      req.params
+      req.query
 
 create table users (
 id serial,
@@ -32,10 +103,24 @@ email varchar(255)
 
 12. Given the Schema above, write the following four basic CRUD db queries using postgres syntax
 
--Get all users:
+-Get all users: SELECT * FROM users
 
--Create a new user with the name of 'your name' and an email of 'fake@fake.com':
+-Create a new user with the name of 'your name' and an email of 'fake@fake.com': INSERT INTO users (name, email) VALUES ('your name', 'fake@fake.com');
 
 -Update the newly created user's name to 'Bobby Boy':
+Assuming we know the ID.
+
+UPDATE users SET name='Bobby Boy' WHERE id=1
+
+or because email would also most likely be unique
+
+UPDATE users SET name='Bobby Boy' WHERE email='fake@fake.com'
+
 
 -Delete the newly updated user:
+
+DELETE FROM users WHERE email='fake@fake.com';
+
+or
+
+DELETE FROM users WHERE id=1;
